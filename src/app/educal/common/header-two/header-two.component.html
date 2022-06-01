@@ -1,0 +1,191 @@
+<header>
+  <div id="header-sticky"
+    [ngClass]="headerSticky ? 'header__area header__transparent header__padding-2 sticky' : headerShadow ? headerShadow : 'header__area header__transparent header__padding-2' ">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
+          <div class="header__left d-flex">
+            <div class="logo">
+              <a [routerLink]="['/home-two']">
+                <img src="assets/img/logo/logo.png" alt="logo">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
+          <div class="header__right d-flex justify-content-end align-items-center">
+            <div class="main-menu main-menu-2">
+              <nav id="mobile-menu">
+                <ul>
+                  <li class="has-dropdown">
+                    <a [routerLink]="['/courses']">Courses</a>
+                    <ul class="submenu">
+                      <li><a [routerLink]="['/courses']">Courses</a></li>
+                      <li><a [routerLink]="['/courses-list']">Course List</a></li>
+                      <li><a [routerLink]="['/course-add']">Course Add</a></li>
+                      <li><a [routerLink]="['/courses-sidebar']">Course sidebar</a></li>
+                      <li><a [routerLink]="['/course-details']">Course Details</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown">
+                    <a [routerLink]="['/blog']">Blog</a>
+                    <ul class="submenu">
+                      <li><a [routerLink]="['/blog']">Blog</a></li>
+                      <li><a [routerLink]="['/blog-details']">Blog Details</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown">
+                    <a [routerLink]="['/courses']">Pages</a>
+                    <ul class="submenu">
+                      <li><a [routerLink]="['/about']">About</a></li>
+                      <li><a [routerLink]="['/instructor']">Instructor</a></li>
+                      <li><a [routerLink]="['/instructor-details']">Instructor Details</a></li>
+                      <li><a [routerLink]="['/event-details']">Event Details</a></li>
+                      <li><a [routerLink]="['/cart']">My Cart</a></li>
+                      <li><a [routerLink]="['/wishlist']">My Wishlist</a></li>
+                      <li><a [routerLink]="['/checkout']">checkout</a></li>
+                      <li><a [routerLink]="['/error']">Error</a></li>
+                    </ul>
+                  </li>
+                  <li><a [routerLink]="['/contact']">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header__btn header__btn-2  ml-50 d-none d-sm-block" *ngIf="!isAuthorized()">
+              <a [routerLink]="['/sign-in']" class="e-btn">Sign in</a>
+            </div>
+
+            <div class="header__btn header__btn-2 ml-50 d-none d-sm-block" *ngIf="!isAuthorized()">
+              <a [routerLink]="['/sign-up']" class="e-btn">Sign up</a>
+            </div>
+
+            <div class="dropdown ml-25" *ngIf="isAuthorized()">
+              <button class="dropbtn"><i class="fal fa-user"></i></button>
+              <div class="dropdown-content">
+                <a href="#" (click)="signOut()">Sign Out</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>
+
+            <div class="sidebar__menu d-xl-none">
+              <div (click)="handleSidebar()" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- sidebar area start -->
+<div class="sidebar__area" [class.sidebar-opened]="showSidebar">
+  <div class="sidebar__wrapper">
+    <div (click)="handleSidebarClose()" class="sidebar__close">
+      <button class="sidebar__close-btn" id="sidebar__close-btn">
+        <span><i class="fal fa-times"></i></span>
+        <span>close</span>
+      </button>
+    </div>
+    <div class="sidebar__content">
+      <div class="logo mb-40">
+        <a [routerLink]="['/']">
+          <img src="../../assets/img/logo/logo.png" alt="logo">
+        </a>
+      </div>
+
+      <div class="side-info-content sidebar-menu mm-menu">
+
+        <ul>
+          <li class="menu-item-has-children has-droupdown" [class.active]="showHomeDropdown">
+            <a (click)="homeDropdown()">Home</a>
+            <ul class="sub-menu" [class.active]="showHomeDropdown">
+              <li>
+                <a [routerLink]="['/']">Home Style 1</a>
+              </li>
+              <li>
+                <a [routerLink]="['/home-two']">Home Style 2</a>
+              </li>
+              <li>
+                <a [routerLink]="['/home-three']">Home Style 3</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item-has-children has-droupdown" [class.active]="showCoursesDropdown">
+            <a (click)="coursesDropdown()">Courses</a>
+            <ul class="sub-menu" [class.active]="showCoursesDropdown">
+              <li>
+                <a [routerLink]="['/courses']">Courses</a>
+              </li>
+              <li>
+                <a [routerLink]="['/courses-list']">Course List</a>
+              </li>
+              <li>
+                <a [routerLink]="['/courses-sidebar']">Course sidebar </a>
+              </li>
+              <li>
+                <a [routerLink]="['/course-details']">Course Details</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item-has-children has-droupdown" [class.active]="showBlogDropdown">
+
+            <a (click)="blogDropdown()">Blog</a>
+            <ul class="sub-menu" [class.active]="showBlogDropdown">
+              <li><a [routerLink]="['/blog']">Blog</a></li>
+              <li><a [routerLink]="['/blog-details']">Blog Details</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item-has-children has-droupdown" [class.active]="showPagesDropdown">
+            <a (click)="pagesDropDown()">Pages</a>
+            <ul class="sub-menu" [class.active]="showPagesDropdown">
+              <li><a [routerLink]="['/about']">About</a></li>
+              <li><a [routerLink]="['/instructor']">Instructor</a></li>
+              <li><a [routerLink]="['/instructor-details']">Instructor Details</a></li>
+              <li><a [routerLink]="['/event-details']">Event Details</a></li>
+              <li><a [routerLink]="['/cart']">My Cart</a></li>
+              <li><a [routerLink]="['/wishlist']">My Wishlist</a></li>
+              <li><a [routerLink]="['/checkout']">checkout</a></li>
+              <li><a [routerLink]="['/error']">Error</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a [routerLink]="['/contact']" class="border-0">Contact</a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="sidebar__search p-relative mt-40 ">
+        <form action="#">
+          <input type="text" placeholder="Search...">
+          <button type="submit"><i class="fad fa-search"></i></button>
+        </form>
+      </div>
+      <div class="sidebar__cart mt-30">
+        <a href="#">
+          <div class="header__cart-icon">
+            <svg viewBox="0 0 24 24">
+              <circle class="st0" cx="9" cy="21" r="1" />
+              <circle class="st0" cx="20" cy="21" r="1" />
+              <path class="st0" d="M1,1h4l2.7,13.4c0.2,1,1,1.6,2,1.6h9.7c1,0,1.8-0.7,2-1.6L23,6H6" />
+            </svg>
+          </div>
+          <span class="cart-item">3</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div (click)="handleSidebarClose()" class="body-overlay" [class.opened]="showSidebar"></div>
+<!-- sidebar area end -->

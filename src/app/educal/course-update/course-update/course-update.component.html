@@ -1,0 +1,42 @@
+<main>
+  <app-header-one header__white="header__white"></app-header-one>
+  <app-breadcrumb title="Course Update" subtitle="Course Update"></app-breadcrumb>
+
+
+  <div class="contact__form" style="margin-top: 3%; margin-bottom: 5%;">
+
+    <div class="row">
+      <div class="col-6" style="margin: 0 auto;">
+        <h5>Select Course</h5>
+        <div class="country-select">
+          <select [(ngModel)]="courseOfSelection" (change)="setCurrentCourse(courseOfSelection)">
+            <option
+            *ngFor="let course of courses"
+            [value]="course"> {{ course.name }} </option>
+          </select>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="courseUpdateForm">
+      <div class="row">
+        <div class="col-6" style="margin: 0 auto">
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Course Name</h5>
+              <input type="text" placeholder="Course Name" formControlName="name">
+            </div>
+          </div>
+
+          <div class="col-xxl-12">
+            <div class="contact__btn">
+              <button type="submit" class="e-btn" (click)="courseUpdate()"> Course Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <app-footer footerPadd='footer__top pt-90 pb-40'></app-footer>
+</main>
