@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
+import { ToastrService } from 'ngx-toastr';
+import { Lesson } from 'src/app/models/lesson';
+import { LessonService } from 'src/app/services/lessonService/lesson.service';
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Autoplay } from "swiper";
 
 // install Swiper modules
-SwiperCore.use([ Pagination, Autoplay])
+SwiperCore.use([Pagination, Autoplay])
 
 @Component({
   selector: 'app-course-details-area',
@@ -84,9 +89,30 @@ export class CourseDetailsAreaComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private courseService: LessonService, private toastrService: ToastrService, private router: Router) {
+    this.activatedRoute.params.subscribe(params => {
+      this.courseId = params['id'];
+    });
+  }
+
+  courseId!: Guid;
+  course!: Lesson;
+
+  getCourseById(id: Guid) {
+    this.courseService.getLessonById(id).subscribe(response => {
+      this.course = response.data;
+    })
+  }
 
   ngOnInit(): void {
+    this.getCourseById(this.courseId);
+  }
+
+  deleteLesson(id: Guid){
+    this.courseService.delete(id).subscribe(response => {
+      this.toastrService.success("Lesson Delete Success...")
+      this.router.navigate(['/courses'])
+    })
   }
 
 }

@@ -6,6 +6,7 @@ import { globalVariables } from 'src/app/globalVariables';
 import { ResponseModel } from 'src/app/models/responseModel';
 import { ListResponseModel } from 'src/app/models/listResponseModel';
 import { Guid } from "guid-typescript";
+import { SingleResponseModel } from 'src/app/models/singleResponseModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,17 +26,32 @@ export class LessonService {
 
   update(lesson:Lesson): Observable<ResponseModel>{
     let apiPath = globalVariables.apiUrl + "Lesson";
-    return this.httpClient.patch<ResponseModel>(apiPath ,lesson)
+    let token = localStorage.getItem("token");
+    const myHeaders = new HttpHeaders()
+    .set('accept', '*/*')
+    .set('Authorization', 'Bearer ' + token)
+    .set('Content-Type', 'application/json-patch+json')
+    return this.httpClient.put<ResponseModel>(apiPath ,{body: lesson}, {headers: myHeaders})
   }
 
   delete(id: Guid){
-    let apiPath = globalVariables.apiUrl + "Lesson?Id=" + id;
-    return this.httpClient.delete<ResponseModel>(apiPath)
+    let apiPath = globalVariables.apiUrl + "Lesson/" + id;
+    let token = localStorage.getItem("token");
+    const myHeaders = new HttpHeaders()
+    .set('accept', '*/*')
+    .set('Authorization', 'Bearer ' + token)
+    .set('Content-Type', 'application/json-patch+json')
+    return this.httpClient.delete<ResponseModel>(apiPath, {headers: myHeaders})
   }
 
   getLessonById(id?: Guid){
-    let apiPath = globalVariables.apiUrl + "Lesson?Id=" + id;
-    return this.httpClient.get<ListResponseModel<Lesson>>(apiPath)
+    let apiPath = globalVariables.apiUrl + "Lesson/" + id;
+    let token = localStorage.getItem("token");
+    const myHeaders = new HttpHeaders()
+    .set('accept', '*/*')
+    .set('Authorization', 'Bearer ' + token)
+    .set('Content-Type', 'application/json-patch+json')
+    return this.httpClient.get<SingleResponseModel<Lesson>>(apiPath, {headers: myHeaders})
   }
 
   getAllLessons(){

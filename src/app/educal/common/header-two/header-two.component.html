@@ -17,14 +17,13 @@
             <div class="main-menu main-menu-2">
               <nav id="mobile-menu">
                 <ul>
-                  <li class="has-dropdown">
+                  <li class="has-dropdown" *ngIf="isAuthorized()">
                     <a [routerLink]="['/courses']">Courses</a>
                     <ul class="submenu">
                       <li><a [routerLink]="['/courses']">Courses</a></li>
                       <li><a [routerLink]="['/courses-list']">Course List</a></li>
                       <li><a [routerLink]="['/course-add']">Course Add</a></li>
-                      <li><a [routerLink]="['/courses-sidebar']">Course sidebar</a></li>
-                      <li><a [routerLink]="['/course-details']">Course Details</a></li>
+                      <li><a [routerLink]="['/course-update']">Course Update</a></li>
                     </ul>
                   </li>
                   <li class="has-dropdown">
@@ -40,7 +39,6 @@
                       <li><a [routerLink]="['/about']">About</a></li>
                       <li><a [routerLink]="['/instructor']">Instructor</a></li>
                       <li><a [routerLink]="['/instructor-details']">Instructor Details</a></li>
-                      <li><a [routerLink]="['/event-details']">Event Details</a></li>
                       <li><a [routerLink]="['/cart']">My Cart</a></li>
                       <li><a [routerLink]="['/wishlist']">My Wishlist</a></li>
                       <li><a [routerLink]="['/checkout']">checkout</a></li>
