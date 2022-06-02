@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LessonService } from 'src/app/services/lessonService/lesson.service';
 
@@ -11,7 +12,7 @@ import { LessonService } from 'src/app/services/lessonService/lesson.service';
 export class CourseAddComponent implements OnInit {
 
   courseForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder, private courseService: LessonService, private toastrService: ToastrService,) { }
+  constructor(private formBuilder: FormBuilder, private courseService: LessonService, private toastrService: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.createCourseForm();
@@ -27,6 +28,7 @@ export class CourseAddComponent implements OnInit {
     let courseModel = Object.assign({}, this.courseForm.value);
     this.courseService.add(courseModel).subscribe(response => {
       this.toastrService.success("Course Added");
+      this.router.navigate(['/courses'])
     },
       responseError => {
         this.toastrService.error(responseError.error.error.errors[0]);

@@ -1,4 +1,4 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -76,11 +76,14 @@ import { ContactAreaComponent } from './contact/contact-area/contact-area.compon
 import { ContactInfoComponent } from './contact/contact-info/contact-info.component';
 import { BlogTwoComponent } from './home-two/blog-two/blog-two.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CourseAddComponent } from './course-add/course-add/course-add.component';
 import { CourseUpdateComponent } from './course-update/course-update/course-update.component';
+import { ClassroomAddComponent } from './classroom-add/classroom-add/classroom-add.component';
+import { ClassroomsComponent } from './classrooms/classrooms/classrooms.component';
+import { ClassroomDetailsComponent } from './classroom-details/classroom-details/classroom-details.component';
 
 @NgModule({
   declarations: [
@@ -157,7 +160,10 @@ import { CourseUpdateComponent } from './course-update/course-update/course-upda
     ContactInfoComponent,
     BlogTwoComponent,
     CourseAddComponent,
-    CourseUpdateComponent
+    CourseUpdateComponent,
+    ClassroomAddComponent,
+    ClassroomsComponent,
+    ClassroomDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -170,6 +176,6 @@ import { CourseUpdateComponent } from './course-update/course-update/course-upda
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EducalModule { }

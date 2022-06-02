@@ -1,0 +1,93 @@
+<main>
+  <app-header-one header__white="header__white"></app-header-one>
+  <app-breadcrumb title="Classroom Add" subtitle="Classroom Add"></app-breadcrumb>
+
+  <div class="contact__form" style="margin-top: 3%; margin-bottom: 5%;">
+    <form [formGroup]="classRoomForm">
+      <div class="row">
+        <div class="col-6" style="margin: 0 auto">
+
+          <div class="col-12" style="margin: 0 auto;">
+            <h5>Instructor</h5>
+            <div class="country-select">
+              <select formControlName="instructorId">
+                <option>Monday</option>
+              </select>
+              <br>
+            </div>
+          </div>
+
+          <div class="col-12" style="margin: 0 auto;">
+            <h5>Lesson</h5>
+            <div class="country-select">
+              <select formControlName="lessonId">
+                <option >Monday</option>
+              </select>
+              <br>
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Start Date</h5>
+              <input type="text" placeholder="Start Date" formControlName="startDate">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Capacity</h5>
+              <input type="number" placeholder="Capacity" formControlName="capacity">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Total Week</h5>
+              <input type="number" placeholder="Total Week" formControlName="totalWeek">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12" style="margin: 0 auto;">
+              <h5>Select Day</h5>
+              <div class="country-select">
+                <select formControlName="day">
+                  <option value="1">Monday</option>
+                  <option value="2">Tuesday</option>
+                  <option value="3">Wednesday</option>
+                  <option value="4">Thursday</option>
+                  <option value="5">Friday</option>
+                  <option value="6">Saturday</option>
+                  <option value="7">Sunday</option>
+                </select>
+                <br>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Start Time Hour</h5>
+              <input type="number" placeholder="Start Time Hour" formControlName="startTimeHour">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>End Time Hour</h5>
+              <input type="number" placeholder="End Time Hour" formControlName="endTimeHour">
+            </div>
+          </div>
+
+          <div class="col-xxl-12">
+            <div class="contact__btn">
+              <button type="submit" class="e-btn" (click)="classRoomAdd()"> Classroom Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <app-footer footerPadd='footer__top pt-90 pb-40'></app-footer>
+</main>

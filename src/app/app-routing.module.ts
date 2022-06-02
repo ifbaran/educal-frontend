@@ -22,6 +22,9 @@ import { ErrorPageComponent } from './educal/error-page/error-page.component';
 import { ContactMainComponent } from './educal/contact/contact-main/contact-main.component';
 import { CourseAddComponent } from './educal/course-add/course-add/course-add.component';
 import { CourseUpdateComponent } from './educal/course-update/course-update/course-update.component';
+import { ClassroomAddComponent } from './educal/classroom-add/classroom-add/classroom-add.component';
+import { ClassroomDetailsComponent } from './educal/classroom-details/classroom-details/classroom-details.component';
+
 
 
 
@@ -45,7 +48,7 @@ const routes: Routes = [
     component: CourseSidebarMainComponent
   },
   {
-    path: 'course-details',
+    path: 'course-details/:id',
     component: CourseDetailsComponent
   },
   {
@@ -67,6 +70,14 @@ const routes: Routes = [
   {
     path: 'instructor-details',
     component: InstructorDetailsComponent
+  },
+  {
+    path: 'classroom-add',
+    component: ClassroomAddComponent
+  },
+  {
+    path: 'classroom-details/:id',
+    component: ClassroomDetailsComponent
   },
   {
     path: 'event-details',

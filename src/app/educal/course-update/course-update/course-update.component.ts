@@ -15,19 +15,22 @@ export class CourseUpdateComponent implements OnInit {
   courseUpdateForm!: FormGroup;
   courses!: Lesson[];
   currentCourse!: Lesson;
+  currentCourseName!: string;
+  currentCourseId!: Guid;
   courseOfSelection!: Lesson;
-  valueWatcherSubscription! : any;
+  activeCourse!: Lesson;
+  valueWatcherSubscription!: any;
 
   constructor(private formBuilder: FormBuilder, private courseService: LessonService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.createCourseUpdateForm();
-    this.courseOfSelection = {id:Guid.parse('5ff4c1dc-05b2-453d-ab1c-57036d228101') , name: 'İngilizce'}
     this.getLessons();
   }
 
   createCourseUpdateForm() {
     this.courseUpdateForm = this.formBuilder.group({
+      lessonGuid: ["", Validators.required],
       name: ["", Validators.required]
     })
   }
@@ -42,15 +45,32 @@ export class CourseUpdateComponent implements OnInit {
     );
   }
 
-  setCurrentCourse(course:Lesson){
-    this.currentCourse = course
-    console.log(this.currentCourse);
+  setCurrentCourse(e: any) {
+    this.courseUpdateForm.get('name')?.setValue(e.target.value);
+    this.currentCourseName = e.target.value;
+    this.courseService.getAllLessons().forEach(courses => {
+      courses.data.forEach(course => {
+        if (course.name == this.currentCourseName) {
+          this.activeCourse = course;
+          this.courseUpdateForm.get('lessonGuid')?.setValue(course.guid);
+        }
+      })
+    })
 
   }
 
 
   courseUpdate() {
+    let courseModel = Object.assign({}, this.courseUpdateForm.value);
+    console.log(courseModel['name']);
 
+    this.courseService.update(courseModel).subscribe(response => {
+      this.toastrService.success(response.message);
+    },
+      responseError => {
+        this.toastrService.error(responseError.error.error.errors[0]);
+      }
+    )
   }
 
 }

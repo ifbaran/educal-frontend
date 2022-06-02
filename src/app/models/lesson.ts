@@ -1,6 +1,6 @@
 import { Guid } from "guid-typescript";
 
 export interface Lesson {
-  id: Guid;
+  guid: Guid;
   name: string;
 }
