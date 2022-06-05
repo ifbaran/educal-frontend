@@ -22,9 +22,23 @@
                   <ul class="submenu">
                     <li><a [routerLink]="['/courses']">Courses</a></li>
                     <li><a [routerLink]="['/courses-list']">Course List</a></li>
-                    <li><a [routerLink]="['/course-add']">Course Add</a></li>
-                    <li><a [routerLink]="['/course-update']">Course Update</a></li>
+                    <li><a [routerLink]="['/course-add']" *ngIf="courseAddUpdateAuthenticate()">Course Add</a></li>
+                    <li><a [routerLink]="['/course-update']" *ngIf="courseAddUpdateAuthenticate()">Course Update</a></li>
                   </ul>
+                </li>
+                <li>
+                  <a [routerLink]="['/my-courses']">My Courses</a>
+                </li>
+                <li class="has-dropdown" *ngIf="isAuthorized() && (loggedUserIsManager() || loggedUserIsRegistrar())">
+                  <a [routerLink]="['/instructor']">Instructors</a>
+                  <ul class="submenu">
+                    <li><a [routerLink]="['/instructor']">Instructor List</a></li>
+                    <li><a [routerLink]="['/instructor-add']">Instructor Add</a></li>
+                    <li><a [routerLink]="['/instructor-update']">Instructor Update</a></li>
+                  </ul>
+                </li>
+                <li *ngIf="isAuthorized() && loggedUserIsManager()">
+                  <a [routerLink]="['/managers']">Managers</a>
                 </li>
                 <li class="has-dropdown">
                   <a [routerLink]="['/blog']">Blog</a>
@@ -66,12 +80,22 @@
                 </g>
               </svg>
             </div>
-            <div class="header__btn header__btn-2 ml-30 d-none d-sm-block" *ngIf="isAuthorized()">
+            <div class="header__btn header__btn-2 ml-30 d-none d-sm-block" *ngIf="!isAuthorized()">
               <a [routerLink]="['/sign-in']" class="e-btn">Sign in</a>
             </div>
-            <div class="header__btn header__btn-2 ml-30 d-none d-sm-block" *ngIf="isAuthorized()">
+            <div class="header__btn header__btn-2 ml-30 d-none d-sm-block" *ngIf="!isAuthorized()">
               <a [routerLink]="['/sign-up']" class="e-btn">Sign up</a>
             </div>
+
+            <div class="dropdown ml-25" *ngIf="isAuthorized()">
+              <button class="dropbtn"><i class="fal fa-user"></i></button>
+              <div class="dropdown-content">
+                <a href="#" (click)="signOut()">Sign Out</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>
+
             <div class="sidebar__menu d-xl-none">
               <div (click)="handleSidebar()" class="sidebar-toggle-btn sidebar-toggle-btn-white ml-30"
                 id="sidebar-toggle">

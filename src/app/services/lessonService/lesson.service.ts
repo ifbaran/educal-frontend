@@ -31,7 +31,8 @@ export class LessonService {
     .set('accept', '*/*')
     .set('Authorization', 'Bearer ' + token)
     .set('Content-Type', 'application/json-patch+json')
-    return this.httpClient.put<ResponseModel>(apiPath ,{body: lesson}, {headers: myHeaders})
+
+    return this.httpClient.put<ResponseModel>(apiPath, lesson, {headers: myHeaders})
   }
 
   delete(id: Guid){

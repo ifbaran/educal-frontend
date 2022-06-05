@@ -1,0 +1,105 @@
+<main>
+  <app-header-two headerShadow="header__area header__padding-2 header__shadow">
+  </app-header-two>
+
+  <section class="teacher__area pt-100 pb-110">
+    <div class="page__title-shape">
+       <img class="page-title-shape-5 d-none d-sm-block" src="assets/img/page-title/page-title-shape-1.png" alt="">
+       <img class="page-title-shape-6" src="assets/img/page-title/page-title-shape-6.png" alt="">
+       <img class="page-title-shape-3" src="assets/img/page-title/page-title-shape-3.png" alt="">
+       <img class="page-title-shape-7" src="assets/img/page-title/page-title-shape-4.png" alt="">
+    </div>
+    <div class="container">
+       <div class="row">
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+             <div class="teacher__details-thumb p-relative w-img pr-30">
+                <img src="{{this.img}}" alt="">
+                <div class="teacher__details-shape">
+                   <img class="teacher-details-shape-1" src="assets/img/teacher/details/shape/shape-1.png" alt="">
+                   <img class="teacher-details-shape-2" src="assets/img/teacher/details/shape/shape-2.png" alt="">
+                </div>
+             </div>
+          </div>
+          <div class="col-xxl-8 col-xl-8 col-lg-8">
+             <div class="teacher__wrapper">
+                <div class="teacher__top d-md-flex align-items-end justify-content-between">
+                   <div class="teacher__info">
+                      <h4>{{manager.name}} {{manager.surname}}</h4>
+                   </div>
+                   <div class="teacher__social-2">
+                      <h4>Follow Us:</h4>
+                      <ul>
+                         <li>
+                            <a href="#">
+                               <i class="social_facebook"></i>
+                            </a>
+                         </li>
+                         <li>
+                            <a href="#">
+                               <i class="social_twitter ms-2"></i>
+                            </a>
+                         </li>
+                         <li>
+                            <a href="#">
+                               <i class="social_vimeo ms-2"></i>
+                            </a>
+                         </li>
+                         <li>
+                            <a href="#">
+                               <i class="social_linkedin ms-2"></i>
+                            </a>
+                         </li>
+                      </ul>
+                   </div>
+                </div>
+                <div class="teacher__bio">
+                  <div class="contact__form" style="margin-top: 3%; margin-bottom: 5%;">
+                    <form [formGroup]="managerForm">
+                      <div class="row">
+                        <div class="col-6" style="margin: 0 auto">
+                          <div class="col-xxl-12 col-xl-12 col-md-12">
+                            <div class="contact__form-input">
+                              <h5>Manager Name</h5>
+                              <input type="text" placeholder="Manager Name" formControlName="name">
+                            </div>
+                          </div>
+
+                          <div class="col-xxl-12 col-xl-12 col-md-12">
+                            <div class="contact__form-input">
+                              <h5>Manager Surname</h5>
+                              <input type="text" placeholder="Manager Surname" formControlName="surname">
+                            </div>
+                          </div>
+
+                          <div class="col-xxl-12 col-xl-12 col-md-12">
+                            <div class="contact__form-input">
+                              <h5>Manager Email</h5>
+                              <input type="text" placeholder="Manager Email" formControlName="email">
+                            </div>
+                          </div>
+
+                          <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 justify-content-between">
+                            <div class="row ">
+                              <div class="contact__btn col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                <button type="submit" class="btn btn-primary" (click)="managerUpdate()"> Manager Update</button>
+                              </div>
+                              <div class="contact__btn col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                <button type="submit" class="btn btn-danger" (click)="managerDelete()"> Manager Delete</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </section>
+
+  <app-cta></app-cta>
+  <app-footer></app-footer>
+</main>

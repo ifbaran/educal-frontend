@@ -14,14 +14,12 @@
         <div *ngFor="let instructor of instructorData" class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
            <div class="teacher__item text-center grey-bg-5 transition-3 mb-30">
               <div class="teacher__thumb w-img fix">
-                 <a href="#">
-                    <img src="{{instructor.img}}" alt="">
+                 <a href="#" (click)="goToInstructorDetail(instructor)">
+                    <img src="{{this.img}}" alt="">
                  </a>
               </div>
               <div class="teacher__content">
                  <h3 class="teacher__title">{{instructor.name}}</h3>
-                 <span> {{instructor.title}}</span>
-
                  <div class="teacher__social">
                     <ul>
                        <li><a href="#"><i class="social_facebook"></i></a></li>

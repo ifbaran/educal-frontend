@@ -27,9 +27,25 @@
                     <ul class="submenu">
                       <li><a [routerLink]="['/courses']">Courses</a></li>
                       <li><a [routerLink]="['/courses-list']">Course List</a></li>
-                      <li><a [routerLink]="['/course-add']">Course Add</a></li>
-                      <li><a [routerLink]="['/course-update']">Course Update</a></li>
+                      <li><a [routerLink]="['/course-add']" *ngIf="courseAddUpdateAuthenticate()">Course Add</a></li>
+                      <li><a [routerLink]="['/course-update']" *ngIf="courseAddUpdateAuthenticate()">Course Update</a></li>
                     </ul>
+                  </li>
+                  <li class="has-dropdown" *ngIf="isAuthorized() && (loggedUserIsManager() || loggedUserIsRegistrar())">
+                    <a [routerLink]="['/instructor']">Instructors</a>
+                    <ul class="submenu">
+                      <li><a [routerLink]="['/instructor']">Instructor List</a></li>
+                      <li><a [routerLink]="['/instructor-add']">Instructor Add</a></li>
+                      <li><a [routerLink]="['/instructor-update']">Instructor Update</a></li>
+                    </ul>
+                  </li>
+
+                  <li *ngIf="isAuthorized() && loggedUserIsManager()">
+                    <a [routerLink]="['/managers']">Managers</a>
+                  </li>
+
+                  <li *ngIf="loggedUserIsStudent()">
+                    <a [routerLink]="['/my-courses']">My Courses</a>
                   </li>
                   <li class="has-dropdown">
                     <a [routerLink]="['/blog']">Blog</a>

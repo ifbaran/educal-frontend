@@ -10,6 +10,7 @@ export class HomeTwoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }
