@@ -1,0 +1,47 @@
+<main>
+  <app-header-one header__white="header__white"></app-header-one>
+  <app-breadcrumb title="Instructor Add" subtitle="Instructor Add"></app-breadcrumb>
+
+  <div class="contact__form" style="margin-top: 3%; margin-bottom: 5%;">
+    <form [formGroup]="instructorForm">
+      <div class="row">
+        <div class="col-6" style="margin: 0 auto">
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Instructor Name</h5>
+              <input type="text" placeholder="Instructor Name" formControlName="name">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Instructor Surname</h5>
+              <input type="text" placeholder="Instructor Surname" formControlName="surname">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Instructor Email</h5>
+              <input type="text" placeholder="Instructor Email" formControlName="email">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Instructor Password</h5>
+              <input type="password" placeholder="Instructor Password" formControlName="password">
+            </div>
+          </div>
+
+          <div class="col-xxl-12">
+            <div class="contact__btn">
+              <button type="submit" class="e-btn" (click)="instructorAdd()"> Instructor Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <app-footer footerPadd='footer__top pt-90 pb-40'></app-footer>
+</main>

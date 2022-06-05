@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Instructor } from 'src/app/models/instructor';
+import { InstructorService } from 'src/app/services/instructorService/instructor.service';
 
 @Component({
   selector: 'app-instructor-area',
@@ -7,47 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstructorAreaComponent implements OnInit {
 
-  instructorData = [
-    {
-        id:1,
-        img:'assets/img/teacher/teacger-1.jpg',
-        name:'Lillian Walsh,',
-        title:'CO Founder',
-    },
-    {
-        id:2,
-        img:'assets/img/teacher/teacher-2.jpg',
-        name:'Kelly Franklin,',
-        title:'Designer',
-    },
-    {
-        id:3,
-        img:'assets/img/teacher/teacher-3.jpg',
-        name:'Hilary Ouse,',
-        title:'Marketer',
-    },
-    {
-        id:4,
-        img:'assets/img/teacher/teacher-4.jpg',
-        name:'Lillian Walsh,',
-        title:'CO Founder',
-    },
-    {
-        id:5,
-        img:'assets/img/teacher/teacher-5.jpg',
-        name:'Shahnewaz,',
-        title:'Web Developer',
-    },
-    {
-        id:6,
-        img:'assets/img/teacher/teacher-6.jpg',
-        name:'Nicola Tesla,,',
-        title:'Engineer',
-    },
-]
-  constructor() { }
+  img = 'assets/img/teacher/teacger-1.jpg';
+  instructorData!: Instructor[];
+
+
+  constructor(private instructorService: InstructorService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getAllInstructors();
+  }
+
+  getAllInstructors(){
+    this.instructorService.getAll().subscribe(response => {
+      this.instructorData = response.data;
+    })
+  }
+
+  goToInstructorDetail(instructor:Instructor){
+    this.router.navigate(['/instructor-details', instructor.guid])
   }
 
 }

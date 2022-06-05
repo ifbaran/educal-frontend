@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
+import { ToastrService } from 'ngx-toastr';
+import { Instructor } from 'src/app/models/instructor';
+import { Lesson } from 'src/app/models/lesson';
+import { InstructorService } from 'src/app/services/instructorService/instructor.service';
+import { LessonService } from 'src/app/services/lessonService/lesson.service';
 
 @Component({
   selector: 'app-instructor-details-area',
@@ -7,67 +15,94 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstructorDetailsAreaComponent implements OnInit {
 
-  courseData = [
-    {
-      id: 1,
-      courseImage: "assets/img/course/course-1.jpg",
-      listImg: "assets/img/course/list/course_list_1.jpeg",
-      lesson: "43",
-      title: "Become a product Manager learn the skills & job.",
-      rating: "4.5",
-      teacherImg: "assets/img/course/teacher/teacher-1.jpg",
-      teacherName: "Jim Séchen",
-      category: "Art & Design",
-      price: "21.00",
-      oldPrice: "33.00"
-    },
-    {
-      id: 2,
-      courseImage: "assets/img/course/course-2.jpg",
-      listImg: "assets/img/course/list/course_list_2.jpeg",
-      lesson: "72",
-      title: "Fundamentals of music theory Learn new",
-      rating: "4.0",
-      teacherImg: "assets/img/course/teacher/teacher-2.jpg",
-      teacherName: "Barry Tone",
-      category: "UX Design",
-      price: "32.00",
-      oldPrice: "68.00",
-      color: "sky-blue"
-    },
-    {
-      id: 3,
-      courseImage: "assets/img/course/course-3.jpg",
-      listImg: "assets/img/course/list/course_list_3.jpeg",
-      lesson: "35",
-      title: "Bases Matemáticas dios Álgebra Ecuacion",
-      rating: "4.3",
-      teacherImg: "assets/img/course/teacher/teacher-3.jpg",
-      teacherName: "Samuel Serif",
-      category: "Development",
-      price: "13.00",
-      oldPrice: "19.00",
-      color: "green"
-    },
-    {
-      id: 4,
-      courseImage: "assets/img/course/course-4.jpg",
-      listImg: "assets/img/course/list/course_list_4.jpeg",
-      lesson: "60",
-      title: "Strategy law and organization Foundation",
-      rating: "3.5",
-      teacherImg: "assets/img/course/teacher/teacher-4.jpg",
-      teacherName: "Elon Gated",
-      category: "Development",
-      price: "62.00",
-      oldPrice: "97.00",
-      color: "blue"
-    }
-  ]
+  img = 'assets/img/teacher/teacger-1.jpg';
+  instructorId!: Guid;
+  instructor!: Instructor;
+  instructorForm!: FormGroup
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private instructorService: InstructorService,
+    private toastrService: ToastrService,
+    private router: Router,
+    private lessonService: LessonService,
+    private formBuilder: FormBuilder) {
+    this.activatedRoute.params.subscribe(params => {
+      this.instructorId = params['id'];
+    });
+  }
 
   ngOnInit(): void {
+    this.createInstructorForm();
+    this.getInstructorById(this.instructorId);
   }
+
+  createInstructorForm() {
+    this.instructorForm = this.formBuilder.group({
+      name: ["", Validators.required],
+      surname: ["", Validators.required],
+      email: ["", Validators.required],
+      courses: ["", Validators.required],
+      workingDays: ["", Validators.required],
+      workingStartTimes: ["", Validators.required],
+      workingEndTimes: ["", Validators.required],
+    })
+  }
+
+  getInstructorById(id: Guid) {
+    this.instructorService.getInstructorById(id).subscribe(response => {
+      this.instructor = response.data;
+      this.fillTheForm();
+    })
+  }
+
+  fillTheForm() {
+    this.instructorForm.controls['name'].setValue(this.instructor.name);
+    this.instructorForm.controls['surname'].setValue(this.instructor.surname);
+    this.instructorForm.controls['email'].setValue(this.instructor.email);
+  }
+
+  updatedInstructor!: Instructor;
+  instructorUpdate() {
+    let instructorModel = Object.assign({}, this.instructorForm.value);
+    // this.updatedInstructor.name = instructorModel['name'];
+    // this.updatedInstructor.surname = instructorModel.surname;
+    // this.updatedInstructor.email = instructorModel.email;
+    // this.updatedInstructor.password = "12345";
+    // this.updatedInstructor.lessons[0] = instructorModel.courses;
+    // this.updatedInstructor.workingTimes[0].day = instructorModel.workingDays;
+    // this.updatedInstructor.workingTimes[0].startTime = instructorModel.workingStartTimes;
+    // this.updatedInstructor.workingTimes[0].endTime = instructorModel.workingEndTimes;
+
+    this.instructorService.update(this.updatedInstructor).subscribe(response => {
+      this.toastrService.success("Instructor Updated");
+      this.router.navigate(['/instructor'])
+    },
+      responseError => {
+        this.toastrService.error(responseError.error.error.errors[0]);
+        this.router.navigate(['/instructor'])
+      }
+    );
+  }
+
+  lessons!: Lesson[];
+  getAllLessons(){
+    this.lessonService.getAllLessons().subscribe(response => {
+      this.lessons = response.data;
+    })
+  }
+
+  instructorDelete(){
+    this.instructorService.delete(this.instructor.guid).subscribe(response => {
+      this.toastrService.success("Instructor Delete Success...")
+      this.router.navigate(['/instructor'])
+    })
+  }
+
+  // deleteLesson(id: Guid){
+  //   this.instructorService.delete(id).subscribe(response => {
+  //     this.toastrService.success("Lesson Delete Success...")
+  //     this.router.navigate(['/courses'])
+  //   })
+  // }
 
 }

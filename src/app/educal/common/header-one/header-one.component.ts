@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit,Input } from '@angular/core';
+import { AuthService } from 'src/app/services/authService/auth.service';
 
 @Component({
   selector: 'app-header-one',
@@ -96,13 +97,50 @@ export class HeaderOneComponent implements OnInit {
     return this.auth;
   }
 
+  loggedUserIsStudent(){
+    if (localStorage.getItem("userType") == "Student") {
+      return true;
+    }
+    return false;
+  }
+
+  loggedUserIsManager(){
+    if (localStorage.getItem("userType") == 'Manager') {
+      return true;
+    }
+    return false;
+  }
+
+  loggedUserIsRegistrar(){
+    if (localStorage.getItem("userType") == 'Registrar') {
+      return true;
+    }
+    return false;
+  }
+
+  loggedUserIsInstructor(){
+    if (localStorage.getItem("userType") == 'Instructor') {
+      return true;
+    }
+    return false;
+  }
+
+  courseAddUpdateAuthenticate(){
+    if (localStorage.getItem("userType") == 'Manager' || localStorage.getItem("userType") == 'Registrar') {
+      return true;
+    }
+    return false;
+  }
+
   signOut(){
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('userType');
     this.auth = false;
     return this.auth;
   }
 
-  constructor() {
+  constructor(private authService: AuthService) {
 
   }
 

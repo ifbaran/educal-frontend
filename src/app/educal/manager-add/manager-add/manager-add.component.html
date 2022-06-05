@@ -1,0 +1,48 @@
+<main>
+  <app-header-one header__white="header__white"></app-header-one>
+  <app-breadcrumb title="Manager Add" subtitle="Manager Add"></app-breadcrumb>
+
+  <div class="contact__form" style="margin-top: 3%; margin-bottom: 5%;">
+    <form [formGroup]="managerForm">
+      <div class="row">
+        <div class="col-6" style="margin: 0 auto">
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Manager Name</h5>
+              <input type="text" placeholder="Manager Name" formControlName="name">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Manager Surname</h5>
+              <input type="text" placeholder="Manager Surname" formControlName="surname">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Manager Email</h5>
+              <input type="text" placeholder="Manager Email" formControlName="email">
+            </div>
+          </div>
+
+          <div class="col-xxl-12 col-xl-12 col-md-12">
+            <div class="contact__form-input">
+              <h5>Manager Password</h5>
+              <input type="password" placeholder="Manager Password" formControlName="password">
+            </div>
+          </div>
+
+          <div class="col-xxl-12">
+            <div class="contact__btn">
+              <button type="submit" class="e-btn" (click)="managerAdd()"> Manager Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <app-footer footerPadd='footer__top pt-90 pb-40'></app-footer>
+</main>

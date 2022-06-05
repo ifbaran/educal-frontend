@@ -1,4 +1,5 @@
 import { Guid } from "guid-typescript";
+import { Lesson } from "./lesson";
 
 export interface Classroom {
   guid: Guid;
@@ -10,4 +11,5 @@ export interface Classroom {
   day: number;
   startTimeHour: number;
   endTimeHour: number;
+  lesson: Lesson;
 }

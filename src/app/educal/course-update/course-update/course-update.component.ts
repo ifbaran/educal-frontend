@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs';
 import { Lesson } from 'src/app/models/lesson';
 import { LessonService } from 'src/app/services/lessonService/lesson.service';
 
@@ -21,7 +23,7 @@ export class CourseUpdateComponent implements OnInit {
   activeCourse!: Lesson;
   valueWatcherSubscription!: any;
 
-  constructor(private formBuilder: FormBuilder, private courseService: LessonService, private toastrService: ToastrService) { }
+  constructor(private formBuilder: FormBuilder, private courseService: LessonService, private toastrService: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.createCourseUpdateForm();
@@ -62,12 +64,22 @@ export class CourseUpdateComponent implements OnInit {
 
   courseUpdate() {
     let courseModel = Object.assign({}, this.courseUpdateForm.value);
-    console.log(courseModel['name']);
 
+    // this.courseService.update(courseModel).pipe(first()).subscribe({
+    //   next: () => {
+    //     this.toastrService.success("Course Updated")
+    //     this.router.navigate(['/courses'])
+    //   },
+    //   error: responseError => {
+    //     this.toastrService.error(responseError.error.error.errors[0])
+    //   }
+    // })
     this.courseService.update(courseModel).subscribe(response => {
-      this.toastrService.success(response.message);
+      this.toastrService.success("Course Updated");
+      this.router.navigate(['/courses'])
     },
       responseError => {
+        console.log(responseError);
         this.toastrService.error(responseError.error.error.errors[0]);
       }
     )

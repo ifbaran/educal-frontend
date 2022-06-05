@@ -58,15 +58,6 @@ export class SignUpAreaComponent implements OnInit {
           this.toastrService.error(responseError.error.error.errors);
         })
         break;
-      case 'Manager':
-        this.managerService.add(registerModel).subscribe(response => {
-          this.toastrService.success("Successful Register. Redirecting...")
-          this.router.navigate(['/sign-in'])
-        },
-        responseError => {
-          this.toastrService.error(responseError.error.error.errors);
-        })
-        break;
       case 'Registrar':
         this.registrarService.add(registerModel).subscribe(response => {
           this.toastrService.success("Successful Register. Redirecting...")

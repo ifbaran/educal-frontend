@@ -24,6 +24,11 @@ import { CourseAddComponent } from './educal/course-add/course-add/course-add.co
 import { CourseUpdateComponent } from './educal/course-update/course-update/course-update.component';
 import { ClassroomAddComponent } from './educal/classroom-add/classroom-add/classroom-add.component';
 import { ClassroomDetailsComponent } from './educal/classroom-details/classroom-details/classroom-details.component';
+import { InstructorAddComponent } from './educal/instructor-add/instructor-add/instructor-add.component';
+import { ManagersComponent } from './educal/managers/managers/managers.component';
+import { ManagerDetailsComponent } from './educal/manager-details/manager-details/manager-details.component';
+import { ManagerAddComponent } from './educal/manager-add/manager-add/manager-add.component';
+import { MyCoursesComponent } from './educal/my-courses/my-courses/my-courses.component';
 
 
 
@@ -52,6 +57,22 @@ const routes: Routes = [
     component: CourseDetailsComponent
   },
   {
+    path: 'manager-details/:id',
+    component: ManagerDetailsComponent
+  },
+  {
+    path: 'managers',
+    component: ManagersComponent
+  },
+  {
+    path: 'manager-add',
+    component: ManagerAddComponent
+  },
+  {
+    path: 'my-courses',
+    component: MyCoursesComponent
+  },
+  {
     path: 'blog',
     component: BlogComponent
   },
@@ -68,7 +89,7 @@ const routes: Routes = [
     component: InstructorMainComponent
   },
   {
-    path: 'instructor-details',
+    path: 'instructor-details/:id',
     component: InstructorDetailsComponent
   },
   {
@@ -114,6 +135,10 @@ const routes: Routes = [
   {
     path: 'course-add',
     component: CourseAddComponent
+  },
+  {
+    path: 'instructor-add',
+    component: InstructorAddComponent
   },
   {
     path: 'course-update',

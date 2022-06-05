@@ -84,6 +84,11 @@ import { CourseUpdateComponent } from './course-update/course-update/course-upda
 import { ClassroomAddComponent } from './classroom-add/classroom-add/classroom-add.component';
 import { ClassroomsComponent } from './classrooms/classrooms/classrooms.component';
 import { ClassroomDetailsComponent } from './classroom-details/classroom-details/classroom-details.component';
+import { InstructorAddComponent } from './instructor-add/instructor-add/instructor-add.component';
+import { ManagersComponent } from './managers/managers/managers.component';
+import { ManagerDetailsComponent } from './manager-details/manager-details/manager-details.component';
+import { ManagerAddComponent } from './manager-add/manager-add/manager-add.component';
+import { MyCoursesComponent } from './my-courses/my-courses/my-courses.component';
 
 @NgModule({
   declarations: [
@@ -164,6 +169,11 @@ import { ClassroomDetailsComponent } from './classroom-details/classroom-details
     ClassroomAddComponent,
     ClassroomsComponent,
     ClassroomDetailsComponent,
+    InstructorAddComponent,
+    ManagersComponent,
+    ManagerDetailsComponent,
+    ManagerAddComponent,
+    MyCoursesComponent,
   ],
   imports: [
     CommonModule,
